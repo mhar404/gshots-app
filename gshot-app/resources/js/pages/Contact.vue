@@ -64,7 +64,7 @@ const submitForm = () => {
                             <i
                                 class="pi pi-map-marker text-red-600 text-lg"
                             ></i>
-                            <span>123 G Shot, Amihan</span>
+                            <span>Block 9 Lot 3, Amira Townhomes, Brgy Sinalhan, Santa Rosa, Laguna</span>
                         </div>
 
                         <div class="flex items-center gap-3">

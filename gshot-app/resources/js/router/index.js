@@ -48,7 +48,7 @@ const routes = [
         children: [
             {
                 path: "",
-                redirect: "/admin/sales"
+                redirect: "/admin/order"
             },
             {
                 path: "order",

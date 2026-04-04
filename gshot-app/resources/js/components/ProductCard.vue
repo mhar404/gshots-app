@@ -77,7 +77,7 @@ function onAddProduct() {
                 <button
                     :disabled="auth.isAdmin"
                     @click="onAddToCart(product)"
-                    class="mt-auto w-full flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-medium text-sm md:text-base transition-all duration-200 whitespace-nowrap"
+                    class="mt-auto w-full flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-medium text-sm md:text-base transition-all duration-200 whitespace-nowrap cursor-pointer"
                 >
                     <i
                         class="pi pi-shopping-cart text-sm sm:text-base md:text-lg hidden xs:inline"

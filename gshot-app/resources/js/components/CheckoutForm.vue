@@ -79,147 +79,186 @@ const confirmCheckout = async () => {
 <template>
     <form
         @submit.prevent="confirmCheckout"
-        class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 flex flex-col gap-3 shadow-lg text-white"
+        class="bg-zinc-900/90 border border-zinc-800 rounded-xl p-6 flex flex-col gap-5 shadow-xl text-white"
     >
-        <h2 class="text-xl sm:text-2xl font-semibold">Checkout Details</h2>
+        <h2 class="text-xl font-bold">Checkout Details</h2>
 
         <div
             v-if="orderStore.activeUserOrders.length > 0"
-            class="p-4 rounded-xl bg-red-500/20 border border-red-500 text-red-100 flex items-center gap-3"
+            class="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 flex items-start gap-3"
         >
-            <i class="pi pi-exclamation-triangle text-2xl"></i>
+            <i class="pi pi-exclamation-triangle mt-0.5"></i>
             <div>
-                <p class="font-bold">Active order detected!</p>
-                <p class="text-sm">
+                <p class="font-semibold text-sm">Active order detected</p>
+                <p class="text-xs mt-1 text-red-400/80">
                     You must wait for your current order to be completed before
                     placing a new one.
                 </p>
             </div>
         </div>
 
-        <label class="text-xs text-gray-400">Full Name</label>
-        <input
-            v-model="userName"
-            type="text"
-            placeholder="Enter your name"
-            class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-sm sm:text-base"
-            required
-        />
-
-        <label class="text-xs text-gray-400">Phone Number</label>
-        <input
-            v-model="userPhone"
-            type="tel"
-            placeholder="09XXXXXXXXX"
-            class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-sm sm:text-base"
-            required
-        />
-
-        <label class="text-xs text-gray-400">Order Type</label>
-        <div class="grid grid-cols-2 gap-3">
-            <div
-                @click="orderType = 'delivery'"
-                :class="[
-                    'cursor-pointer rounded-xl border p-3 flex items-center justify-center gap-2 transition',
-                    orderType === 'delivery'
-                        ? 'border-red-500 ring-1 ring-red-500 bg-red-500/10 text-white'
-                        : 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10',
-                ]"
-            >
-                <i class="pi pi-truck text-xl"></i>
-                <span class="text-sm">Delivery</span>
+        <div class="flex flex-col gap-4">
+            <div>
+                <label class="text-sm font-medium text-zinc-400 mb-1 block"
+                    >Full Name</label
+                >
+                <input
+                    v-model="userName"
+                    type="text"
+                    placeholder="Enter your name"
+                    class="w-full px-4 py-2.5 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-sm"
+                    required
+                />
             </div>
 
-            <div
-                @click="
-                    orderType = 'pickup';
-                    paymentMethod = 'gcash';
-                    userAddress = '';
-                "
-                :class="[
-                    'cursor-pointer rounded-xl border p-3 flex items-center justify-center gap-2 transition',
-                    orderType === 'pickup'
-                        ? 'border-red-500 ring-1 ring-red-500 bg-red-500/10 text-white'
-                        : 'border-white/10 bg-white/5 text-gray-300 hover:bg-white/10',
-                ]"
+            <div>
+                <label class="text-sm font-medium text-zinc-400 mb-1 block"
+                    >Phone Number</label
+                >
+                <input
+                    v-model="userPhone"
+                    type="tel"
+                    placeholder="09XXXXXXXXX"
+                    class="w-full px-4 py-2.5 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none text-sm"
+                    required
+                />
+            </div>
+        </div>
+
+        <div>
+            <label class="text-sm font-medium text-zinc-400 mb-2 block"
+                >Order Type</label
             >
-                <i class="pi pi-shop text-xl"></i>
-                <span class="text-sm">Pickup</span>
+            <div class="grid grid-cols-2 gap-3">
+                <button
+                    type="button"
+                    @click="orderType = 'delivery'"
+                    :class="[
+                        'rounded-lg border p-3 flex items-center justify-center gap-2 transition-colors duration-200 cursor-pointer',
+                        orderType === 'delivery'
+                            ? 'border-red-500 bg-red-500/10 text-red-500'
+                            : 'border-zinc-700 bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800',
+                    ]"
+                >
+                    <i class="pi pi-truck text-lg"></i>
+                    <span class="text-sm font-medium">Delivery</span>
+                </button>
+
+                <button
+                    type="button"
+                    @click="
+                        orderType = 'pickup';
+                        paymentMethod = 'gcash';
+                        userAddress = '';
+                    "
+                    :class="[
+                        'rounded-lg border p-3 flex items-center justify-center gap-2 transition-colors duration-200 cursor-pointer',
+                        orderType === 'pickup'
+                            ? 'border-red-500 bg-red-500/10 text-red-500'
+                            : 'border-zinc-700 bg-zinc-800/50 text-zinc-400 hover:bg-zinc-800',
+                    ]"
+                >
+                    <i class="pi pi-shop text-lg"></i>
+                    <span class="text-sm font-medium">Store Pickup</span>
+                </button>
             </div>
         </div>
 
         <!-- Delivery Address -->
-        <div v-if="orderType === 'delivery'" class="gap-3 flex flex-col">
-            <label class="text-xs text-gray-400">Address</label>
+        <div v-if="orderType === 'delivery'">
+            <label class="text-sm font-medium text-zinc-400 block"
+                >Address</label
+            >
+
             <textarea
                 v-model="userAddress"
-                placeholder="Enter address or use location"
-                class="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none resize-none h-24 text-sm sm:text-base"
+                placeholder="Enter complete address"
+                class="w-full px-4 py-3 rounded-lg bg-zinc-800/50 border border-zinc-700 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none resize-none h-24 text-sm"
                 required
             ></textarea>
 
-            <p class="text-xs text-gray-400">
-                Auto-filled from your location. Feel free to edit.
-            </p>
-
-            <button
-                type="button"
-                @click="getLocation"
-                class="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 py-2 px-4 rounded-full font-medium shadow-md hover:shadow-lg transition text-sm sm:text-base cursor-pointer"
-            >
-                <i class="pi pi-map-marker"></i>
-                <span>Use My Location</span>
-            </button>
+            <div class="flex justify-between items-center gap-2 mt-2">
+                <button
+                    type="button"
+                    @click="getLocation"
+                    class="text-red-500 hover:text-red-400 text-sm flex items-center gap-1.5 font-medium transition-colors cursor-pointer"
+                >
+                    <i class="pi pi-map-marker"></i>
+                    Use my current location
+                </button>
+                <p class="text-xs text-gray-400">
+                    (Auto-filled from your location. Feel free to edit.)
+                </p>
+            </div>
         </div>
 
         <!-- Pickup Map -->
-        <div v-if="orderType === 'pickup'" class="gap-3 flex flex-col">
-            <label class="text-xs text-gray-400">Store Location</label>
-            <div
-                class="w-full h-40 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-gray-400"
+        <div v-if="orderType === 'pickup'">
+            <label class="text-sm font-medium text-zinc-400 mb-1 block"
+                >Store Location</label
             >
-                Map Placeholder
-            </div>
+            <iframe
+                class="w-full h-48 rounded-lg border border-zinc-700 bg-zinc-800/50"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3865.691880407137!2d121.10351467590805!3d14.329327083072225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d90032870333%3A0x961ad3705ffa6db3!2sG'SHOT%20TEAS!5e0!3m2!1sen!2sph!4v1743753412586!5m2!1sen!2sph"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
         </div>
 
         <!-- Mode of Payment -->
-        <label class="text-xs text-gray-400">Mode of Payment</label>
-        <div class="grid grid-cols-2 gap-3">
-            <div
-                @click="paymentMethod = 'gcash'"
-                :class="[
-                    'cursor-pointer rounded-xl border flex items-center justify-center bg-white transition py-2',
-                    paymentMethod === 'gcash'
-                        ? 'border-red-500 ring-2 ring-red-500'
-                        : 'border-white/10',
-                ]"
-            >
-                <img src="/icons/GCash-Logo.png" class="h-10 object-contain" />
+        <div>
+            <div class="flex justify-between items-center mb-2">
+                <label class="text-sm font-medium text-zinc-400 block"
+                    >Payment Method</label
+                >
+                <span v-if="paymentError" class="text-red-400 text-xs"
+                    >Required</span
+                >
             </div>
+            <div class="grid grid-cols-2 gap-3">
+                <button
+                    type="button"
+                    @click="paymentMethod = 'gcash'"
+                    :class="[
+                        'rounded-lg border flex items-center justify-center bg-white h-14 transition-colors cursor-pointer',
+                        paymentMethod === 'gcash'
+                            ? 'border-red-500 ring-2 ring-red-500'
+                            : 'border-zinc-200',
+                    ]"
+                >
+                    <img
+                        src="/icons/GCash-Logo.png"
+                        class="h-14 object-contain"
+                    />
+                </button>
 
-            <div
-                v-if="orderType === 'delivery'"
-                @click="paymentMethod = 'cash'"
-                :class="[
-                    'cursor-pointer rounded-xl border flex items-center justify-center bg-white transition py-2',
-                    paymentMethod === 'cash'
-                        ? 'border-red-500 ring-2 ring-red-500'
-                        : 'border-white/10',
-                ]"
-            >
-                <img src="/icons/cod-logo.png" class="h-10 object-contain" />
+                <button
+                    type="button"
+                    v-if="orderType === 'delivery'"
+                    @click="paymentMethod = 'cash'"
+                    :class="[
+                        'rounded-lg border flex items-center justify-center bg-white h-14 transition-colors cursor-pointer',
+                        paymentMethod === 'cash'
+                            ? 'border-red-500 ring-2 ring-red-500'
+                            : 'border-zinc-200',
+                    ]"
+                >
+                    <img
+                        src="/icons/cod-logo.png"
+                        class="h-12 object-contain"
+                    />
+                </button>
             </div>
-
-            <p v-if="paymentError" class="text-red-400 text-xs mt-1 col-span-2">
-                Please select a payment method
-            </p>
         </div>
 
         <button
             type="submit"
             :disabled="isSubmitting || orderStore.activeUserOrders.length > 0"
-            class="mt-4 w-full bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed py-3 rounded-xl font-semibold transition cursor-pointer"
+            class="w-full bg-red-600 hover:bg-red-700 disabled:bg-zinc-700 disabled:text-zinc-500 text-white disabled:cursor-not-allowed py-3.5 rounded-lg font-bold text-sm transition-colors mt-2 leading-none inline-flex items-center justify-center gap-2"
         >
+            <i v-if="isSubmitting" class="pi pi-spinner pi-spin"></i>
             {{ isSubmitting ? "Processing..." : "Confirm Checkout" }}
         </button>
     </form>
