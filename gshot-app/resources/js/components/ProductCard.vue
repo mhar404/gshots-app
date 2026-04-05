@@ -25,7 +25,7 @@ function onAddProduct() {
 
 <template>
     <div
-        class="bg-white/10 rounded-xl overflow-hidden transition duration-300 hover:scale-105 flex flex-col h-full"
+        class="border border-white/10 bg-white/5 rounded-xl overflow-hidden transition duration-300 hover:scale-105 flex flex-col h-full"
     >
         <!-- ADD PRODUCT CARD -->
         <div

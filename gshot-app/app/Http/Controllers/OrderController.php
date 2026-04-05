@@ -4,69 +4,64 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Events\OrderUpdated;
 use App\Http\Requests\StoreOrderRequest;
-use Illuminate\Support\Facades\DB;
+use App\Actions\CreateOrderAction;
+use App\Http\Resources\OrderResource;
 use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
-    public function store(StoreOrderRequest $request)
+    /**
+     * Store a newly created order in storage.
+     */
+    public function store(StoreOrderRequest $request, CreateOrderAction $createOrderAction)
     {
-        $validated = $request->validated();
-
-        $order = DB::transaction(function () use ($validated) {
-            $order = Order::create([
-                'user_id' => Auth::id(),
-                'name' => $validated['name'],
-                'phone' => $validated['phone'],
-                'payment_method' => $validated['payment_method'],
-                'order_type' => $validated['order_type'],
-                'address' => $validated['address'] ?? null,
-                'total' => $validated['total'],
-            ]);
-
-            $order->items()->createMany($validated['items']);
-
-            return $order;
-        });
-
-        $order->refresh(); // Load the default status
-
-        event(new \App\Events\OrderCreated($order));
+        $order = $createOrderAction->execute($request->validated());
 
         return response()->json([
             'message' => 'Order created successfully',
             'order_id' => $order->id
-        ]);
+        ], 201);
     }
 
+    /**
+     * Display a listing of the orders.
+     */
     public function index(Request $request)
     {
-        $query = Order::with('items')->latest();
+        $orders = Order::with('items')
+            ->forUser($request->user())
+            ->latest()
+            ->get();
 
-        if ($request->user() && $request->user()->role !== 'admin') {
-            $query->where('user_id', $request->user()->id);
-        }
-
-        return response()->json($query->get());
+        return OrderResource::collection($orders)->resolve();
     }
 
+    /**
+     * Display the specified order.
+     */
     public function show($id)
     {
         $order = Order::with('items')->findOrFail($id);
 
         Gate::authorize('view', $order);
 
-        return response()->json($order);
+        return (new OrderResource($order))->resolve();
     }
 
+    /**
+     * Update the status of the specified order.
+     */
     public function updateStatus(Request $request, $id)
     {
         $order = Order::findOrFail($id);
 
         Gate::authorize('update', $order);
+
+        $request->validate([
+            'status' => ['required', 'string', \Illuminate\Validation\Rule::enum(\App\Enums\OrderStatus::class)],
+        ]);
 
         $order->status = $request->status;
         $order->save();
@@ -75,10 +70,13 @@ class OrderController extends Controller
 
         return response()->json([
             'message' => 'Status updated',
-            'order' => $order
+            'order' => (new OrderResource($order))->resolve()
         ]);
     }
 
+    /**
+     * Remove all orders from storage.
+     */
     public function destroyAll()
     {
         // Gate::authorize('deleteAny', Order::class);

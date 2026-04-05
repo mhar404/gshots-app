@@ -198,7 +198,7 @@ const series = computed(() => [
         ></div>
 
         <!-- Dark Overlay (FIXED) -->
-        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="absolute inset-0 bg-black/70"></div>
 
         <div class="relative z-10 max-w-6xl mx-auto space-y-8">
             <div

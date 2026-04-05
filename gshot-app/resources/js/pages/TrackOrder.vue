@@ -39,7 +39,7 @@ onMounted(async () => {
     <div
         class="relative min-h-screen bg-[url('/assets/menu-bg.jpg')] bg-cover bg-center pt-28 pb-10 px-4 sm:px-6 lg:px-8 text-white"
     >
-        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="absolute inset-0 bg-black/70"></div>
 
         <div
             v-for="order in orderStatus"

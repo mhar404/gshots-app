@@ -31,10 +31,10 @@ class OrderUpdated implements ShouldBroadcast
         return 'order.updated';
     }
 
-    public function broadcastWith()
+    public function broadcastWith(): array
     {
         return [
-            'order' => $this->order->load('items')
+            'order' => (new \App\Http\Resources\OrderResource($this->order->load('items')))->resolve()
         ];
     }
 }

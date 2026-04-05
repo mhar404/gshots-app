@@ -8,7 +8,7 @@ import CheckoutForm from "@/components/CheckoutForm.vue";
         class="relative min-h-screen bg-[url('/assets/menu-bg.jpg')] bg-cover bg-center pt-28 pb-10 px-4 sm:px-6 lg:px-8"
     >
         <!-- Background Overlay -->
-        <div class="absolute inset-0 bg-black/75 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-black/70 pointer-events-none"></div>
 
         <!-- Core Component Grids -->
         <div

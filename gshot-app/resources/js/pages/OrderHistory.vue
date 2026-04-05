@@ -39,7 +39,7 @@ const formatDate = (dateString) => {
         class="relative min-h-screen bg-[url('/assets/menu-bg.jpg')] bg-cover bg-center pt-24 pb-10 px-4 sm:px-6 lg:px-8 text-white flex flex-col items-center"
     >
         <!-- Overlay -->
-        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="absolute inset-0 bg-black/70"></div>
 
         <div class="relative z-10 w-full max-w-4xl">
             <div class="mb-6 text-center">

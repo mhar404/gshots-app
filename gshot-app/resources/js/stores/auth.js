@@ -36,14 +36,12 @@ export const useAuthStore = defineStore("auth", {
                 console.log(res.data);
 
                 const cartStore = useCartStore();
-                await cartStore.fetchCart();
+                cartStore.fetchCart();
 
                 const orderStore = useOrderStore();
-                if (this.isAdmin) {
-                    await orderStore.fetchOrders();
-                } else {
-                    await orderStore.fetchOrders(); // Assuming users might track their order too
-                }
+                orderStore.fetchOrders();
+
+                return res.data;
             } catch (error) {
                 this.errors = error.response?.data?.errors || {};
                 console.log(error.response?.data);

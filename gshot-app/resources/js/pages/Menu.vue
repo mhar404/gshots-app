@@ -94,7 +94,7 @@ watch(
         class="py-24 px-6 relative bg-[url('/assets/menu-bg.jpg')] bg-cover bg-center min-h-screen"
     >
         <!-- Overlay -->
-        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="absolute inset-0 bg-black/70"></div>
 
         <div class="max-w-7xl mx-auto relative z-10 px-4">
             <!-- Header Section -->

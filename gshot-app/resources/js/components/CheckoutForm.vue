@@ -230,7 +230,7 @@ const confirmCheckout = async () => {
                 >
                     <img
                         src="/icons/GCash-Logo.png"
-                        class="h-14 object-contain"
+                        class="h-12 object-contain"
                     />
                 </button>
 
@@ -247,7 +247,7 @@ const confirmCheckout = async () => {
                 >
                     <img
                         src="/icons/cod-logo.png"
-                        class="h-12 object-contain"
+                        class="h-10 object-contain"
                     />
                 </button>
             </div>

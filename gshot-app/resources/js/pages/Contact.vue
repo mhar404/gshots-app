@@ -20,7 +20,7 @@ const submitForm = () => {
         class="relative py-28 px-6 bg-[url('/assets/menu-bg.jpg')] bg-cover bg-center overflow-hidden"
     >
         <!-- Dark overlay -->
-        <div class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="absolute inset-0 bg-black/70 z-0"></div>
 
         <!-- Content Wrapper -->
         <div class="relative z-10 max-w-6xl mx-auto">
@@ -64,7 +64,10 @@ const submitForm = () => {
                             <i
                                 class="pi pi-map-marker text-red-600 text-lg"
                             ></i>
-                            <span>Block 9 Lot 3, Amira Townhomes, Brgy Sinalhan, Santa Rosa, Laguna</span>
+                            <span
+                                >Block 9 Lot 3, Amira Townhomes, Brgy Sinalhan,
+                                Santa Rosa, Laguna</span
+                            >
                         </div>
 
                         <div class="flex items-center gap-3">

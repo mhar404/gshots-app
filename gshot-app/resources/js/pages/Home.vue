@@ -49,7 +49,7 @@ const testimonials = [
     <div
         class="relative min-h-screen bg-[url('/assets/menu-bg.jpg')] bg-cover bg-center"
     >
-        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="absolute inset-0 bg-black/70"></div>
         <div class="relative z-10">
             <!-- HERO SECTION -->
             <main
@@ -105,7 +105,7 @@ const testimonials = [
             </main>
 
             <!-- COLLECTION -->
-            <section class="relative py-15 md:py-20 px-6" id="collection">
+            <section class="relative py-15 md:py-18 px-6" id="collection">
                 <div class="relative max-w-7xl mx-auto">
                     <div class="text-center mb-12">
                         <h1

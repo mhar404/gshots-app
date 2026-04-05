@@ -4,7 +4,7 @@
     <section
         class="relative py-28 px-6 bg-cover bg-center overflow-hidden bg-[url('/assets/menu-bg.jpg')]"
     >
-        <div class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="absolute inset-0 bg-black/70 z-0"></div>
 
         <div class="relative z-10 max-w-6xl mx-auto">
             <div class="mb-20">

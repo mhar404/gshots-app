@@ -69,7 +69,7 @@ onMounted(async () => {
         <div
             class="absolute inset-0 bg-[url('/assets/menu-bg.jpg')] bg-cover bg-center"
         ></div>
-        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="absolute inset-0 bg-black/70"></div>
 
         <div class="max-w-6xl mx-auto relative z-10 px-4">
             <!-- Header Section -->

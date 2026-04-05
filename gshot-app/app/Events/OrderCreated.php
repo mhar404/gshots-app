@@ -33,7 +33,7 @@ class OrderCreated implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'order' => $this->order->load('items')
+            'order' => (new \App\Http\Resources\OrderResource($this->order->load('items')))->resolve()
         ];
     }
 }
