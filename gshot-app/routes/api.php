@@ -46,3 +46,5 @@ Route::middleware('auth:sanctum')->get('/order', [OrderController::class, 'index
 Route::middleware('auth:sanctum')->patch('/order/{id}', [OrderController::class, 'updateStatus']);
 Route::middleware('auth:sanctum')->get('/order/{id}', [OrderController::class, 'show']);
 Route::delete('/order', [OrderController::class, 'destroyAll']);
+
+Route::post('/chat', [\App\Http\Controllers\ChatController::class, 'chat']);

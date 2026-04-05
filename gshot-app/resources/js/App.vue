@@ -10,6 +10,7 @@ import CartModal from "@/components/CartModal.vue";
 import CartToast from "@/components/CartToast.vue";
 import AuthToast from "@/components/AuthToast.vue";
 import ActiveOrderWidget from "@/components/ActiveOrderWidget.vue";
+import ChatBot from "@/components/ChatBot.vue";
 import { useOrderStore } from "@/stores/order";
 
 const loading = ref(true);
@@ -53,7 +54,9 @@ const isAdminRoute = computed(() => {
         <CartToast />
         <AuthToast />
         <ActiveOrderWidget />
+        <ChatBot />
     </template>
+
 
     <main :class="{ 'h-screen overflow-hidden': isAdminRoute }">
         <RouterView />
