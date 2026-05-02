@@ -25,7 +25,7 @@ class ChatController extends Controller
 
         // 1. Fetch menu context
         try {
-            $products = Product::all(['name', 'description', 'price', 'category']);
+            $products = Product::all(['name', 'description', 'price', 'category', 'is_available']);
         } catch (\Exception $e) {
             \Log::error('Chat Database Error: ' . $e->getMessage());
             $products = collect();
@@ -34,13 +34,15 @@ class ChatController extends Controller
         $menuContext = "Store Name: Gshot\n";
         $menuContext .= "Products Menu:\n";
         foreach ($products as $product) {
-            $menuContext .= "- {$product->name} ({$product->category}): {$product->description}. Price: ₱{$product->price}\n";
+            $status = $product->is_available ? 'Available' : 'Not Available';
+            $menuContext .= "- {$product->name} [Status: {$status}] ({$product->category}): {$product->description}. Price: ₱{$product->price}\n";
         }
 
         // 2. Prepare the prompt
         $systemPrompt = "You are 'Gshot Assistant', a friendly and helpful AI assistant for Gshot, a beverage/milk tea shop. 
         Use the following menu context to answer customer questions accurately. 
         If a customer asks for a recommendation, suggest something based on the menu. 
+        IMPORTANT: Pay attention to the [Status] of products. DO NOT recommend products that are 'Not Available'. If they ask for a 'Not Available' item, politely inform them it's currently out of stock and suggest an 'Available' alternative.
         Keep your responses concise, friendly, and use emojis occasionally. 
         If they ask something unrelated to Gshots or beverages, politely refocus them on the menu.
 

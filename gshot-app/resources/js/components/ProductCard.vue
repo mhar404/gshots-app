@@ -44,7 +44,14 @@ function onAddProduct() {
                     :src="product.image_url"
                     :alt="product.name"
                     class="w-full h-40 sm:h-44 md:h-52 lg:h-56 object-cover transition duration-500 hover:scale-110"
+                    :class="{ 'opacity-50 grayscale': !product.is_available }"
                 />
+
+                <div v-if="!product.is_available" class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                    <span class="bg-black/80 text-red-400 px-4 py-2 rounded-lg font-bold text-sm sm:text-base border border-red-500/30 shadow-lg backdrop-blur-sm -rotate-6 uppercase tracking-wider">
+                        Not Available
+                    </span>
+                </div>
                 <button
                     v-if="isAdmin"
                     @click="onAdminOptions(product)"
@@ -75,9 +82,10 @@ function onAddProduct() {
 
                 <!-- Add to Cart Button -->
                 <button
-                    :disabled="auth.isAdmin"
+                    :disabled="auth.isAdmin || !product.is_available"
                     @click="onAddToCart(product)"
-                    class="mt-auto w-full flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-medium text-sm md:text-base transition-all duration-200 whitespace-nowrap cursor-pointer"
+                    class="mt-auto w-full flex items-center justify-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full font-medium text-sm md:text-base transition-all duration-200 whitespace-nowrap"
+                    :class="(!product.is_available) ? 'bg-gray-600 text-gray-300 cursor-not-allowed opacity-70' : 'bg-red-600 hover:bg-red-700 text-white cursor-pointer'"
                 >
                     <i
                         class="pi pi-shopping-cart text-sm sm:text-base md:text-lg hidden xs:inline"

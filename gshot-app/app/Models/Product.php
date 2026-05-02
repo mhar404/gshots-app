@@ -14,6 +14,11 @@ class Product extends Model
         'price',
         'image',
         'category',
+        'is_available',
+    ];
+
+    protected $casts = [
+        'is_available' => 'boolean',
     ];
 
     public function carts()
