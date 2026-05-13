@@ -90,12 +90,16 @@ const updateStatus = async (status) => {
                 </p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6">
-                <div class="bg-white/10 border border-white/10 rounded-xl p-4">
+                <div
+                    class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4"
+                >
                     <p class="text-xs text-gray-400">Total Orders</p>
                     <h2 class="text-2xl font-semibold">{{ totalOrders }}</h2>
                 </div>
 
-                <div class="bg-white/10 border border-white/10 rounded-xl p-4">
+                <div
+                    class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4"
+                >
                     <p class="text-xs text-gray-400">Pending</p>
                     <h2 class="text-2xl font-semibold text-yellow-400">
                         {{ pendingOrders }}
@@ -104,7 +108,7 @@ const updateStatus = async (status) => {
 
                 <div
                     @click="goToCompletedOrders"
-                    class="group relative bg-white/10 border border-white/10 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-[1.02] hover:border-green-400/40"
+                    class="group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 cursor-pointer transition-all duration-300 hover:bg-white/20 hover:scale-[1.02] hover:border-green-400/40"
                 >
                     <div
                         class="absolute top-3 right-3 text-gray-400 group-hover:text-green-400 transition"
@@ -136,7 +140,7 @@ const updateStatus = async (status) => {
             >
                 <!-- LEFT PANEL -->
                 <div
-                    class="lg:col-span-4 bg-white/10 border border-white/10 rounded-xl flex flex-col max-h-[70vh]"
+                    class="lg:col-span-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col max-h-[70vh]"
                 >
                     <div class="p-5 border-b border-white/10">
                         <h1 class="font-semibold">Orders</h1>
@@ -195,7 +199,7 @@ const updateStatus = async (status) => {
 
                 <!-- RIGHT PANEL -->
                 <div
-                    class="lg:col-span-8 bg-white/10 border border-white/10 rounded-xl flex flex-col"
+                    class="lg:col-span-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl flex flex-col"
                 >
                     <div class="p-5 border-b border-white/10">
                         <h2 class="font-semibold">

@@ -234,6 +234,33 @@ const confirmCheckout = async () => {
                     />
                 </button>
 
+                <!--PICKUP CASH-->
+                <button
+                    type="button"
+                    v-if="orderType === 'pickup'"
+                    @click="paymentMethod = 'cash'"
+                    :class="[
+                        'rounded-lg border flex items-center justify-center gap-2 bg-white h-14 transition-colors cursor-pointer',
+                        paymentMethod === 'cash'
+                            ? 'border-red-500 ring-2 ring-red-500'
+                            : 'border-zinc-200',
+                    ]"
+                >
+                    <img src="/icons/pesosign.png" class="h-8 object-contain" />
+
+                    <span
+                        :class="[
+                            'text-sm font-medium transition-colors',
+                            paymentMethod === 'cash'
+                                ? 'text-red-600'
+                                : 'text-zinc-800',
+                        ]"
+                    >
+                        Cash on Pickup
+                    </span>
+                </button>
+
+                <!--DELIVERY COD-->
                 <button
                     type="button"
                     v-if="orderType === 'delivery'"
